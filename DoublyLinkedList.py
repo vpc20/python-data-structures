@@ -23,7 +23,7 @@ class DoublyLinkedList:
             self.tail = new_node  # new node will be both head and tail
 
     def append(self, val):
-        if self.head is None:
+        if self.head is None:  # empty list
             self.prepend(val)
         else:
             new_node = Node(val)
@@ -33,18 +33,18 @@ class DoublyLinkedList:
             self.tail = new_node  # new node will always be the tail
 
     def delete(self, node):
-        if node == self.head:
-            temp_head = self.head
-            self.head = self.head.next
+        if self.head is None:  # empty list
+            return
+        if node == self.head:  # node.next will be the new head
+            self.head = node.next
             self.head.prev = None
-            del temp_head
-        elif node == self.tail:
-            temp_tail = self.tail
-            self.tail = self.tail.prev
+        elif node == self.tail:  # node.prev will be the new tail
+            self.tail = node.prev
             self.tail.next = None
-            del temp_tail
-        else:
-            pass
+        else:  # prev node and next node will be linked to each other
+            node.prev.next = node.next
+            node.next.prev = node.prev
+        del node
 
     def display_forward(self):
         curr = self.head
@@ -75,5 +75,9 @@ dl.display_forward()
 dl.display_reversed()
 
 dl.delete(dl.tail)
+dl.display_forward()
+dl.display_reversed()
+
+dl.delete(dl.head.next)
 dl.display_forward()
 dl.display_reversed()
