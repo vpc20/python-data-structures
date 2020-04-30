@@ -135,28 +135,36 @@ class BinarySearchTree:
                 stack.append(curr.left)
         return True
 
-    @staticmethod
-    def _height(curr):
-        """
-        The height of a node in a tree is the number of edges on the longest simple
-        downward path from the node to a leaf, and the height of a tree is the
-        height of its root.
+    # @staticmethod
+    # def _height(curr):
+    #     """
+    #     The height of a node in a tree is the number of edges on the longest simple
+    #     downward path from the node to a leaf, and the height of a tree is the
+    #     height of its root.
+    #
+    #     :param curr: node of the tree
+    #     :return: height of the node
+    #     """
+    #
+    #     def _height_aux(curr, height):
+    #         nonlocal max_height
+    #         max_height = max(max_height, height)
+    #         if curr.left:
+    #             _height_aux(curr.left, height + 1)
+    #         if curr.right:
+    #             _height_aux(curr.right, height + 1)
+    #
+    #     max_height = 0
+    #     _height_aux(curr, 0)
+    #     return max_height
 
-        :param curr: node of the tree
-        :return: height of the node
-        """
-
-        def _height_aux(curr, height):
-            nonlocal max_height
-            max_height = max(max_height, height)
-            if curr.left:
-                _height_aux(curr.left, height + 1)
-            if curr.right:
-                _height_aux(curr.right, height + 1)
-
-        max_height = 0
-        _height_aux(curr, 0)
-        return max_height
+    def _height(self, curr):
+        left, right = 0, 0
+        if curr.left:
+            left = 1 + self._height(curr.left)
+        if curr.right:
+            right = 1 + self._height(curr.right)
+        return max(left, right)
 
     def height(self, key):
         curr = self._search(self.root, key)
@@ -191,7 +199,7 @@ class BinarySearchTree:
     def search(self, key):
         return bool(self._search(self.root, key))
 
-    # todo rename methods, remove 'tree-' prefix in name
+
     @staticmethod
     def _tree_minimum(curr):
         while curr.left:
@@ -716,3 +724,5 @@ if __name__ == '__main__':
     bst.print_inorder()
     bst.delete(1)
     bst.print_inorder()
+
+    print(bst.height(8))
