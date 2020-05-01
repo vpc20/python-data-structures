@@ -277,7 +277,7 @@ class BinarySearchTree:
         pred = self._tree_predecessor(curr)
         return pred.key if pred else None
 
-    def tree_insert(self, new_key):
+    def insert(self, new_key):
         curr = self.root
         parent = None
 
@@ -407,6 +407,7 @@ class BinarySearchTree:
     #     print('')
     #
 
+    # ------------------------------------------------------
     def print_inorder(self):
         def _print_inorder(curr):
             if curr.left:
@@ -418,6 +419,56 @@ class BinarySearchTree:
         _print_inorder(self.root)
         print('')
 
+    def inorder_arr(self):
+        def _print_inorder(curr):
+            if curr.left:
+                _print_inorder(curr.left)
+            inorder_arr.append(curr.key)
+            if curr.right:
+                _print_inorder(curr.right)
+
+        inorder_arr = []
+        _print_inorder(self.root)
+        return inorder_arr
+
+    def print_inorder_iter(self):
+        curr = self.root
+        stack = [curr]
+        printed = set()
+        while stack:
+            if curr.left and curr.left not in printed:
+                stack.append(curr)
+                curr = curr.left
+            elif curr not in printed:
+                print(curr.key, end=' ')
+                printed.add(curr)
+            elif curr.right and curr.right not in printed:
+                stack.append(curr)
+                curr = curr.right
+            else:
+                curr = stack.pop()
+        print('')
+
+    def inorder_iter_arr(self):
+        curr = self.root
+        stack = [curr]
+        printed = set()
+        inorder_arr = []
+        while stack:
+            if curr.left and curr.left not in printed:
+                stack.append(curr)
+                curr = curr.left
+            elif curr not in printed:
+                inorder_arr.append(curr.key)
+                printed.add(curr)
+            elif curr.right and curr.right not in printed:
+                stack.append(curr)
+                curr = curr.right
+            else:
+                curr = stack.pop()
+        return inorder_arr
+
+    # ------------------------------------------------------
     def print_preorder(self):
         def _print_preorder(curr):
             print(curr.key, end=' ')
@@ -429,17 +480,115 @@ class BinarySearchTree:
         _print_preorder(self.root)
         print('')
 
-    def preorder(self):
+    def preorder_arr(self):
         def _preorder(curr):
-            preorder_vertices.append(curr.key)
+            preorder_arr.append(curr.key)
             if curr.left:
                 _preorder(curr.left)
             if curr.right:
                 _preorder(curr.right)
 
-        preorder_vertices = []
+        preorder_arr = []
         _preorder(self.root)
-        return preorder_vertices
+        return preorder_arr
+
+    def print_preorder_iter(self):
+        curr = self.root
+        stack = [curr]
+        printed = set()
+        while stack:
+            if curr not in printed:
+                print(curr.key, end=' ')
+                printed.add(curr)
+            if curr.left and curr.left not in printed:
+                stack.append(curr)
+                curr = curr.left
+            elif curr.right and curr.right not in printed:
+                stack.append(curr)
+                curr = curr.right
+            else:
+                curr = stack.pop()
+        print('')
+
+    def preorder_iter_arr(self):
+        curr = self.root
+        stack = [curr]
+        printed = set()
+        preorder_arr = []
+        while stack:
+            if curr not in printed:
+                preorder_arr.append(curr.key)
+                printed.add(curr)
+            if curr.left and curr.left not in printed:
+                stack.append(curr)
+                curr = curr.left
+            elif curr.right and curr.right not in printed:
+                stack.append(curr)
+                curr = curr.right
+            else:
+                curr = stack.pop()
+        return preorder_arr
+
+    # ------------------------------------------------------
+    def print_postorder(self):
+        def _print_postorder(curr):
+            if curr.left:
+                _print_postorder(curr.left)
+            if curr.right:
+                _print_postorder(curr.right)
+            print(curr.key, end=' ')
+
+        _print_postorder(self.root)
+        print('')
+
+    def postorder_arr(self):
+        def _print_postorder(curr):
+            if curr.left:
+                _print_postorder(curr.left)
+            if curr.right:
+                _print_postorder(curr.right)
+            postorder_arr.append(curr.key)
+
+        postorder_arr = []
+        _print_postorder(self.root)
+        return postorder_arr
+
+    def print_postorder_iter(self):
+        curr = self.root
+        stack = [curr]
+        printed = []
+        while stack:
+            if curr.left and curr.left not in printed:
+                stack.append(curr)
+                curr = curr.left
+            elif curr.right and curr.right not in printed:
+                stack.append(curr)
+                curr = curr.right
+            elif curr not in printed:
+                print(curr.key, end=' ')
+                printed.append(curr)
+            else:
+                curr = stack.pop()
+        print('')
+
+    def postorder_iter_arr(self):
+        curr = self.root
+        stack = [curr]
+        printed = []
+        postorder_arr = []
+        while stack:
+            if curr.left and curr.left not in printed:
+                stack.append(curr)
+                curr = curr.left
+            elif curr.right and curr.right not in printed:
+                stack.append(curr)
+                curr = curr.right
+            elif curr not in printed:
+                postorder_arr.append(curr.key)
+                printed.append(curr)
+            else:
+                curr = stack.pop()
+        return postorder_arr
 
     # def print_preorder(self):
     #     self._print_preorder(self.root)
@@ -514,23 +663,23 @@ class BinarySearchTree:
     #             if stack:
     #                 curr = stack[-1]
 
-    def print_preorder_iterative(self):
-        curr = self.root
-        stack = [curr]
-        printed = []
-        while stack:
-            if curr not in printed:
-                print(curr.key, end=' ')
-                printed.append(curr)
-            if curr.left and curr.left not in printed:
-                stack.append(curr)
-                curr = curr.left
-            elif curr.right and curr.right not in printed:
-                stack.append(curr)
-                curr = curr.right
-            else:
-                curr = stack.pop()
-        print('')
+    # def print_preorder_iterative(self):
+    #     curr = self.root
+    #     stack = [curr]
+    #     printed = []
+    #     while stack:
+    #         if curr not in printed:
+    #             print(curr.key, end=' ')
+    #             printed.append(curr)
+    #         if curr.left and curr.left not in printed:
+    #             stack.append(curr)
+    #             curr = curr.left
+    #         elif curr.right and curr.right not in printed:
+    #             stack.append(curr)
+    #             curr = curr.right
+    #         else:
+    #             curr = stack.pop()
+    #     print('')
 
     # def print_preorder_iterative(self):
     #     stack = [self.root]
@@ -542,17 +691,6 @@ class BinarySearchTree:
     #         if curr.left is not None:
     #             stack.append(curr.left)
     #     print('')
-
-    def print_postorder(self):
-        def _print_postorder(curr):
-            if curr.left:
-                _print_postorder(curr.left)
-            if curr.right:
-                _print_postorder(curr.right)
-            print(curr.key, end=' ')
-
-        _print_postorder(self.root)
-        print('')
 
     # def print_postorder(self):
     #     self._print_postorder(self.root)
@@ -1008,55 +1146,68 @@ if __name__ == '__main__':
     # bst.tree_insert(3)
 
     bst = BinarySearchTree()
-    bst.tree_insert(8)
-    bst.tree_insert(4)
-    bst.tree_insert(12)
-    bst.tree_insert(2)
-    bst.tree_insert(6)
-    bst.tree_insert(10)
-    bst.tree_insert(14)
-    bst.tree_insert(1)
-    bst.tree_insert(3)
-    bst.tree_insert(5)
-    bst.tree_insert(7)
-    bst.tree_insert(9)
-    bst.tree_insert(11)
-    bst.tree_insert(13)
-    bst.tree_insert(15)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(12)
+    bst.insert(2)
+    bst.insert(6)
+    bst.insert(10)
+    bst.insert(14)
+    bst.insert(1)
+    bst.insert(3)
+    bst.insert(5)
+    bst.insert(7)
+    bst.insert(9)
+    bst.insert(11)
+    bst.insert(13)
+    bst.insert(15)
     bst.print_inorder()
 
     bst = BinarySearchTree()
-    bst.tree_insert(5)
-    bst.tree_insert(2)
+    bst.insert(5)
+    bst.insert(2)
     bst.print_all_level_order()
     bst.tree_delete(5)
     bst.print_all_level_order()
 
     print('-----')
     bst = BinarySearchTree()
-    bst.tree_insert(5)
-    bst.tree_insert(8)
+    bst.insert(5)
+    bst.insert(8)
     bst.print_all_level_order()
     bst.tree_delete(5)
     bst.print_all_level_order()
 
     print('-----')
     bst = BinarySearchTree()
-    bst.tree_insert(8)
-    bst.tree_insert(4)
-    bst.tree_insert(12)
-    bst.tree_insert(2)
-    bst.tree_insert(6)
-    bst.tree_insert(10)
-    bst.tree_insert(14)
-    bst.tree_insert(1)
-    bst.tree_insert(3)
-    bst.tree_insert(5)
-    bst.tree_insert(7)
-    bst.tree_insert(9)
-    bst.tree_insert(11)
-    bst.tree_insert(13)
-    bst.tree_insert(15)
+    bst.insert(8)
+    bst.insert(4)
+    bst.insert(12)
+    bst.insert(2)
+    bst.insert(6)
+    bst.insert(10)
+    bst.insert(14)
+    bst.insert(1)
+    bst.insert(3)
+    bst.insert(5)
+    bst.insert(7)
+    bst.insert(9)
+    bst.insert(11)
+    bst.insert(13)
+    bst.insert(15)
+
+    bst.print_preorder()
+    bst.print_preorder_iter()
+    print(bst.preorder_arr())
+    print(bst.preorder_iter_arr())
+
     bst.print_inorder()
-    bst.tree_delete(1)
-    bst.print_inorder()
+    bst.print_inorder_iter()
+    print(bst.inorder_arr())
+    print(bst.inorder_iter_arr())
+
+    bst.print_postorder()
+    bst.print_postorder_iter()
+    print(bst.postorder_arr())
+    print(bst.postorder_iter_arr())
+

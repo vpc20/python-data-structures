@@ -199,7 +199,6 @@ class BinarySearchTree:
     def search(self, key):
         return bool(self._search(self.root, key))
 
-
     @staticmethod
     def _tree_minimum(curr):
         while curr.left:
