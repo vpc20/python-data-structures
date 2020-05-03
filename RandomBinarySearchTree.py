@@ -78,7 +78,39 @@ def random_bst(num_nodes=50, max_intval=1000):
     return bst
 
 
-bst = random_bst(10, 100)
-bst.print_preorder()
-bst.print_inorder()
-bst.print_postorder()
+if __name__ == '__main__':
+    bst = random_bst()
+    bst.print_preorder()
+    bst.print_inorder()
+    bst.print_postorder()
+    # print(height(bst.root))
+    # print(height_dfs(bst.root))
+
+    # bst1 = BinarySearchTree()
+    # bst1.insert(77)
+    # bst1.insert(3)
+    # bst1.insert(42)
+    # bst1.insert(14)
+    # bst1.insert(4)
+    # bst1.insert(71)
+    # bst1.insert(51)
+    # bst1.insert(43)
+    # bst1.insert(59)
+    # print('--------------------------------------')
+    # print(height(bst1.root))
+    # print(height_dfs(bst1.root))
+
+    # 77, 3, 42, 14, 4, 71, 51, 43, 59
+
+    # for _ in range(100):
+    #     bst = random_bst()
+    #     bst.print_inorder()
+    #     assert is_valid_bst(bst) == True
+    #
+    # node1 = Node(1)
+    # node2 = Node(2)
+    # node3 = Node(3)
+    # bst = BinarySearchTree()
+    # bst.root = node2
+    # node2.right = node1
+    # print(is_valid_bst(bst))

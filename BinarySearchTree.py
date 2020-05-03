@@ -93,6 +93,19 @@ class BinarySearchTree:
                 stack.append(curr.left)
         return True
 
+    # def is_valid_bst(bst):
+    #     def dfs(curr):
+    #         if curr.left and curr.left.val > curr.val \
+    #                 or curr.right and curr.right.val < curr.val:
+    #             return False
+    #         if curr.left and dfs(curr.left) is False:
+    #             return False
+    #         if curr.right and dfs(curr.right) is False:
+    #             return False
+    #         return True
+    #
+    #     return dfs(bst.root)
+
     def is_full(self):
         """
         A tree is a full binary tree if each node is either a leaf or has degree exactly 2.
