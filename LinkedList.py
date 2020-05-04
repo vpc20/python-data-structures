@@ -174,6 +174,21 @@ class LinkedList:
             mid = mid.next
         return mid.data
 
+    def reverse(self):
+        def reverse_aux(curr, prev):
+            if curr.next is None:
+                self.head = curr
+                curr.next = prev
+                return
+            next = curr.next
+            curr.next = prev
+            reverse_aux(next, curr)
+
+        if self.head is None:
+            return
+        reverse_aux(self.head, None)
+
+
 list1 = LinkedList()
 list1.append(222)
 list1.append(333)
@@ -200,3 +215,14 @@ list1.delete(3)
 print(list1)
 print(list1.index(555))
 print(list1.to_array())
+
+list1 = LinkedList()
+list1.append(1)
+list1.append(2)
+list1.append(3)
+list1.append(4)
+list1.append(5)
+
+print(list1)
+list1.reverse()
+print(list1)
