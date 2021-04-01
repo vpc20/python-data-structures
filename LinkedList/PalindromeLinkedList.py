@@ -28,23 +28,37 @@ def print_list(curr):
     print('')
 
 
+# def is_palindrome(head):
+#     nodes = []
+#
+#     curr = head
+#     while curr:
+#         nodes.append(curr.val)
+#         curr = curr.next
+#
+#     curr = head
+#     while curr:
+#         if curr.val != nodes.pop():
+#             return False
+#         curr = curr.next
+#
+#     return True
+
+
 def is_palindrome(head):
-    nodes = []
-
+    arr = []
     curr = head
     while curr:
-        nodes.append(curr.val)
+        arr.append(curr.val)
         curr = curr.next
 
-    curr = head
-    while curr:
-        if curr.val != nodes.pop():
+    n = len(arr)
+    for i in range(n // 2):
+        if arr[i] != arr[n - 1 - i]:
             return False
-        curr = curr.next
-
     return True
 
 
-list1=linked_list([1, 2, 3, 2, 1])
+list1 = linked_list([1, 2, 3, 2, 1])
 print_list(list1)
 print(is_palindrome(list1))
