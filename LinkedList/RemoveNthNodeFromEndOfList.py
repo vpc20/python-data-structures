@@ -48,22 +48,40 @@ def remove_nth_from_end(head, n):
         return head
 
 
+# def remove_nth_from_end_one_pass(head, n):
+#     l = 0
+#     nodes = []
+#     curr = head
+#     while curr:
+#         nodes.append(curr)
+#         l += 1
+#         curr = curr.next
+#
+#     if l == 1:
+#         return None
+#     i = l - n - 1
+#     if i < 0:
+#         head = head.next
+#     else:
+#         nodes[i].next = nodes[i].next.next
+#     return head
+
 def remove_nth_from_end_one_pass(head, n):
-    l = 0
-    nodes = []
     curr = head
+    prevn = head
+    ctr = 0
+
     while curr:
-        nodes.append(curr)
-        l += 1
+        ctr += 1
+        if ctr > n + 1:
+            prevn = prevn.next
         curr = curr.next
 
-    if l == 1:
-        return None
-    i = l - n - 1
-    if i < 0:
+    if prevn == head and ctr == n:
         head = head.next
-    else:
-        nodes[i].next = nodes[i].next.next
+    elif prevn.next is not None:
+        prevn.next = prevn.next.next
+
     return head
 
 
