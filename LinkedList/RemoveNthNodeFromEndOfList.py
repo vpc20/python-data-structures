@@ -79,11 +79,25 @@ def remove_nth_from_end_one_pass(head, n):
 
     if prevn == head and ctr == n:
         head = head.next
-    elif prevn.next is not None:
+    else:
         prevn.next = prevn.next.next
 
     return head
 
+
+# class Solution:
+#     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+#         slow = fast = head
+#
+#         for i in range(n):
+#             fast = fast.next
+#         if fast is None:
+#             return head.next
+#         while fast and fast.next:
+#             fast = fast.next
+#             slow = slow.next
+#         slow.next = slow.next.next
+#         return head
 
 list1 = linked_list([1, 2, 3, 4, 5])
 print(list1)
