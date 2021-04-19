@@ -11,6 +11,9 @@ class ListNode:
             curr = curr.next
         return s[:-5]
 
+    def __repr__(self):
+        return f'ListNode({self.val})'
+
 
 def linked_list(vals):
     if not vals:
