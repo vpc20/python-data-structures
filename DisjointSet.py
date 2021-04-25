@@ -12,21 +12,10 @@ class DisjointSet:
         self.parent[x] = x
         self.rank[x] = 0
 
-    def find_set(self, x):  # use path compression
+    def find_set(self, x):  # use path compression, find root parent
         if x != self.parent[x]:
             self.parent[x] = self.find_set(self.parent[x])
         return self.parent[x]
-
-    # def find_set(self, x):  # use path compression
-    #     xlist = []
-    #     while x != self.parent[x]:
-    #         xlist.append(x)
-    #         x = self.parent[x]
-    #     for i in xlist:
-    #         self.parent[i] = self.parent[x]
-    #     # while xlist:
-    #     #     self.parent[xlist.pop()] = self.parent[x]
-    #     return self.parent[x]
 
     def link(self, x, y):  # union by rank
         if self.rank[x] > self.rank[y]:
@@ -42,7 +31,7 @@ class DisjointSet:
     def get_set(self):
         conn_comps = defaultdict(set)
         for k, val in self.parent.items():
-            conn_comps[val].add(k)
+            conn_comps[self.find_set(val)].add(k)
         return list(conn_comps.values())
 
 
